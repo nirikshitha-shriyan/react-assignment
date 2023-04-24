@@ -2,11 +2,11 @@ import Modal from "../UI/Modal";
 import WishlistItem from "./WishlistItem";
 import classes from "./Wishlist.module.css";
 import CartContext from "../store/cart-context";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 const Wishlist = (props) => {
   const cartCtx = useContext(CartContext);
-  const hasItems = cartCtx.wishlistItems.length > 0;
+  //const hasItems = cartCtx.wishlistItems.length > 0;
   const totalAmount = `$${cartCtx.wishlistTotalAmount.toFixed(2)}`;
 
   const wishlistItems = (
@@ -31,7 +31,7 @@ const Wishlist = (props) => {
         <span>{totalAmount}</span>
       </div>
       <div className={classes.actions}>
-        <button className={classes["button--alt"]} onClick={props.onClose}>
+        <button className={classes.button} onClick={props.onClose}>
           Close
         </button>
       </div>

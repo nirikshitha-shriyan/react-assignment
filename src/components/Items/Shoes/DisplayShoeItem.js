@@ -29,21 +29,21 @@ const DisplayShoeItem = (props) => {
   };
 
   return (
-    // <li className={classes.shoe}>
-     <li className={classes.div}>
-      {/* <div className={classes.div}> */}
-        <div >
-          <img src={props.img} width="100px" height="100px" alt="not visible" />
-          <h3>{props.name}</h3>
-          <div className={classes.description}>{props.description}</div>
-          <div className={classes.price}>{price}</div>
-        </div>
-        <div  >
-          <button className={classes.button} onClick={addToCartHandler}>Add To Cart</button>
-          {/* <div className={classes.price}></div> */}
-          <button className={classes.button} onClick={addToWishlistHandler}>Add To Wishlist</button>
-        </div>
-      {/* </div> */}
+    <li className={classes.div}>
+      <div className={classes.divleft}>
+        <img src={props.img} width="150px" height="150px" alt="not visible" />
+      </div>
+      <div className={classes.shoe}>
+        <h3>{props.name}</h3>
+        <div className={classes.description}>{props.description}</div>
+        <div className={classes.price}>{price}</div>
+        <button className={classes.button} onClick={addToCartHandler}>
+          Add To Cart
+        </button>
+        <button className={classes.button} onClick={addToWishlistHandler}>
+          Add To Wishlist
+        </button>
+      </div>
     </li>
   );
 };

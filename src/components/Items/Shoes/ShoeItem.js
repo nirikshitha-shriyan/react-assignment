@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import AddButton from "../AddButton";
 import classes from "./ShoeItem.module.css";
 import CartContext from "../../store/cart-context";
 

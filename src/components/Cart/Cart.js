@@ -28,7 +28,6 @@ const Cart = (props) => {
 
   const orderHandler = () => {
     console.log("order placed");
-    //cartCtx.placeOrder();
     setIsCheckout(true);
   };
 
@@ -48,37 +47,9 @@ const Cart = (props) => {
     cartCtx.placeOrder();
   };
 
-  // return (
-  //   <Modal onClose={props.onClose}>
-  //     <h1>Cart</h1>
-  //     {cartItems}
-  //     <div className={classes.total}>
-  //       <span>Total Amount</span>
-  //       <span>{totalAmount}</span>
-  //     </div>
-
-  //     {isCheckout && (
-  //       <Checkout onConfirm={checkoutHandler} onCancel={props.onClose} />
-  //     )}
-
-  //     {!isCheckout && (
-  //       <div className={classes.actions}>
-  //         <button className={classes["button--alt"]} onClick={props.onClose}>
-  //           Close
-  //         </button>
-  //         {hasItems && (
-  //           <button className={classes.button} onClick={orderHadler}>
-  //             Order
-  //           </button>
-  //         )}
-  //       </div>
-  //     )}
-  //   </Modal>
-  // );
-
   const modalActions = (
     <div className={classes.actions}>
-      <button className={classes["button--alt"]} onClick={props.onClose}>
+      <button className={classes.button} onClick={props.onClose}>
         Close
       </button>
       {hasItems && (
