@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import classes from "./Checkout.module.css";
 
 const Checkout = (props) => {
@@ -52,6 +52,7 @@ const Checkout = (props) => {
         <label htmlFor="pincode">Pincode</label>
         <input type="text" id="pincode" onChange={pincodeInputChangeHandler} />
       </div>
+
       <div className={classes.actions}>
         <button
           type="button"

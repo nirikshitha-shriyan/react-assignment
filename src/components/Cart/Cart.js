@@ -34,16 +34,29 @@ const Cart = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [didSubmit, setDidSubmit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [enteredInputIsValid, setEnteredInputIsValid] = useState(false);
 
   const checkoutHandler = (userData) => {
     setIsCheckout(false);
     setIsSubmitting(false);
+
+    if (
+      userData.name.trim() === "" ||
+      userData.city.trim() === "" ||
+      userData.street.trim() === "" ||
+      userData.pincode.trim() === ""
+    ) {
+      setEnteredInputIsValid(true);
+      console.log("invaliddddddd");
+      return;
+    }
     setDidSubmit(true);
     if (localStorage.getItem("loggedIn")) {
       setIsLoggedIn(true);
     } else {
       return;
     }
+
     cartCtx.placeOrder();
   };
 
@@ -68,7 +81,10 @@ const Cart = (props) => {
         <span>{totalAmount}</span>
       </div>
       {isCheckout && (
-        <Checkout onConfirm={checkoutHandler} onCancel={props.onClose} />
+        <div>
+          <p>Checkout Details:</p>
+          <Checkout onConfirm={checkoutHandler} onCancel={props.onClose} />
+        </div>
       )}
       {!isCheckout && modalActions}
     </React.Fragment>
@@ -76,6 +92,12 @@ const Cart = (props) => {
 
   const isSubmittingModalContent = <p>Sending order data...</p>;
   const isLoginModalContent = <p>Please Login...</p>;
+
+  const isValidFormContent = (
+    <React.Fragment>
+      <p>Please fill all the details</p>
+    </React.Fragment>
+  );
 
   const didSubmitModalContent = (
     <React.Fragment>
@@ -92,6 +114,17 @@ const Cart = (props) => {
     <Modal onClose={props.onClose}>
       {!isSubmitting && !didSubmit && cartModalContent}
       {isSubmitting && isSubmittingModalContent}
+      {!isSubmitting &&
+        !didSubmit &&
+        enteredInputIsValid &&
+        !isLoggedIn &&
+        isValidFormContent}
+      {!isSubmitting &&
+        !didSubmit &&
+        enteredInputIsValid &&
+        isLoggedIn &&
+        isValidFormContent}
+
       {!isSubmitting && didSubmit && !isLoggedIn && isLoginModalContent}
       {!isSubmitting && didSubmit && isLoggedIn && didSubmitModalContent}
     </Modal>

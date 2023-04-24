@@ -11,3 +11,11 @@
     border-radius: 25px;
     font-weight: bold;
   }
+
+  .span {
+    font-weight: bold;
+    margin: 5px;
+    font: inherit;
+    align-items: center;
+    font-size: small;
+  }

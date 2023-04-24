@@ -11,7 +11,23 @@ const defaultCartState = {
 const cartReducer = (state, action) => {
   if (action.type === "ADD") {
     console.log("Cart Provider - added");
-    const updatedItems = state.items.concat(action.item);
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.item.id
+    );
+    let updatedItems;
+    const existingCartItem = state.items[existingCartItemIndex];
+    if (existingCartItem) {
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount + action.item.amount,
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
+    } else {
+      updatedItems = state.items.concat(action.item);
+    }
+
+    //const updatedItems = state.items.concat(action.item);
     const updatedAmount = state.totalAmount + action.item.price;
     return {
       items: updatedItems,
@@ -29,7 +45,7 @@ const cartReducer = (state, action) => {
     console.log("existingCartItemIndex" + existingCartItemIndex);
     const existingItem = state.items[existingCartItemIndex];
     const updatedItems = state.items.filter((item) => item.id !== action.id);
-    const updatedAmount = state.totalAmount - existingItem.price;
+    const updatedAmount = state.totalAmount - (existingItem.price * existingItem.amount);
     return {
       items: updatedItems,
       totalAmount: updatedAmount,
@@ -56,8 +72,25 @@ const cartReducer = (state, action) => {
 
   if (action.type === "MOVETOCART") {
     console.log("moved to cart");
-    const updatedCartItems = state.items.concat(action.item);
+
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.item.id
+    );
+    let updatedCartItems;
+    const existingCartItem = state.items[existingCartItemIndex];
+    if (existingCartItem) {
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount + action.item.amount,
+      };
+      updatedCartItems = [...state.items];
+      updatedCartItems[existingCartItemIndex] = updatedItem;
+    } else {
+      updatedCartItems = state.items.concat(action.item);
+    }
     const updatedCartAmount = state.totalAmount + action.item.price;
+
+
 
     const existingWishlistItemIndex = state.wishlistItems.findIndex(
       (item) => item.id === action.item.id
