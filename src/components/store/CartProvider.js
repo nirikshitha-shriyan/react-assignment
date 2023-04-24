@@ -45,7 +45,8 @@ const cartReducer = (state, action) => {
     console.log("existingCartItemIndex" + existingCartItemIndex);
     const existingItem = state.items[existingCartItemIndex];
     const updatedItems = state.items.filter((item) => item.id !== action.id);
-    const updatedAmount = state.totalAmount - (existingItem.price * existingItem.amount);
+    const updatedAmount =
+      state.totalAmount - existingItem.price * existingItem.amount;
     return {
       items: updatedItems,
       totalAmount: updatedAmount,
@@ -60,14 +61,27 @@ const cartReducer = (state, action) => {
 
   if (action.type === "ADDTOWISHLIST") {
     console.log("added to wishlist");
-    const updatedItems = state.wishlistItems.concat(action.item);
-    const updatedAmount = state.wishlistTotalAmount + action.item.price;
-    return {
-      items: state.items,
-      totalAmount: state.totalAmount,
-      wishlistItems: updatedItems,
-      wishlistTotalAmount: updatedAmount,
-    };
+    const existingWishlistItemIndex = state.wishlistItems.findIndex(
+      (item) => item.id === action.item.id
+    );
+    const existingwishlistItem = state.wishlistItems[existingWishlistItemIndex];
+    if (!existingwishlistItem) {
+      const updatedItems = state.wishlistItems.concat(action.item);
+      const updatedAmount = state.wishlistTotalAmount + action.item.price;
+      return {
+        items: state.items,
+        totalAmount: state.totalAmount,
+        wishlistItems: updatedItems,
+        wishlistTotalAmount: updatedAmount,
+      };
+    } else {
+      return {
+        items: state.items,
+        totalAmount: state.totalAmount,
+        wishlistItems: state.wishlistItems,
+        wishlistTotalAmount: state.wishlistTotalAmount,
+      };
+    }
   }
 
   if (action.type === "MOVETOCART") {
@@ -89,8 +103,6 @@ const cartReducer = (state, action) => {
       updatedCartItems = state.items.concat(action.item);
     }
     const updatedCartAmount = state.totalAmount + action.item.price;
-
-
 
     const existingWishlistItemIndex = state.wishlistItems.findIndex(
       (item) => item.id === action.item.id
