@@ -1,0 +1,15 @@
+.header {
+    /* position: fixed; */
+    width: 100%;
+    height: 5rem;
+    background-color: rgb(213, 178, 245);
+    color: white;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.div {
+    align-items: center;
+    display: flex;
+}

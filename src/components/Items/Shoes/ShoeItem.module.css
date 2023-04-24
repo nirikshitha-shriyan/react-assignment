@@ -1,0 +1,37 @@
+.shoe {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+    padding-bottom: 1rem;
+    border: 1px solid #ccc;
+  }
+  
+  .shoe h3 {
+    margin: 0 0 0.25rem 0;
+  }
+  
+  .description {
+    font-style: italic;
+  }
+  
+  .price {
+    margin-top: 0.25rem;
+    font-weight: bold;
+    color: #ad5502;
+    font-size: 1.25rem;
+  }
+
+  .shoe button {
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    background-color: rgb(148, 42, 148);
+    color: white;
+    padding: 0.25rem 1rem;
+    /* display: flex; */
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+  }

@@ -1,24 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/Header/Header";
+import Shoes from "./components/Items/Shoes/Shoes";
+import Login from "./components/Login/Login";
+import { useState } from "react";
+import Cart from "./components/Cart/Cart";
+import Wishlist from "./components/Wishlist/Wishlist";
+import CartProvider from "./components/store/CartProvider";
 
 function App() {
+  const [cartIsShown, setCartISShown] = useState(false);
+  const hideCartHandler = () => {
+    setCartISShown(false);
+  };
+  const showCartHandler = () => {
+    setCartISShown(true);
+  };
+
+  const [loginIsShown, setLoginIsShown] = useState(false);
+  const hideLoginHandler = () => {
+    setLoginIsShown(false);
+  };
+  const showLoginHandler = () => {
+    setLoginIsShown(true);
+  };
+
+  const [wishlistIsShown, setWishlistIsShown] = useState(false);
+  const hideWishlistHandler = () => {
+    setWishlistIsShown(false);
+  };
+  const showWishlistHandler = () => {
+    setWishlistIsShown(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CartProvider>
+      {loginIsShown && <Login onClose={hideLoginHandler} />}
+      {cartIsShown && <Cart onClose={hideCartHandler} />}
+      {wishlistIsShown && <Wishlist onClose={hideWishlistHandler}></Wishlist>}
+      <Header
+        onShowLogin={showLoginHandler}
+        onShowCart={showCartHandler}
+        onShowWishlist={showWishlistHandler}
+      ></Header>
+      <Shoes />
+    </CartProvider>
   );
 }
 
